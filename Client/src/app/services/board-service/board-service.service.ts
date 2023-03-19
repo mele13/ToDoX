@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BoardService {
-  private apiUrl = 'http://localhost:8082//api/boards'; 
+  private apiUrl = 'http://localhost:8082/api/boards'; 
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,11 @@ export class BoardService {
   }
 
   // Creates a new board in backend
-  createBoard(boardName: string): Observable<any> {
-    return this.http.post(this.apiUrl, { name: boardName });
+  createBoard(boardName: string, boardDescription: string): Observable<any> {
+    const board = {
+      name: boardName,
+      description: boardDescription,
+    };
+    return this.http.post(`${this.apiUrl}/createBoard`, board);
   }
 }

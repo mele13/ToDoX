@@ -15,8 +15,8 @@ use App\Http\Controllers\BoardController;
 |
 */
 
-Route::get('board', [BoardController::class, 'index']);
-Route::post('board', [BoardController::class, 'create']);
+Route::get('boards', [BoardController::class, 'index']);
+Route::post('boards/createBoard', [BoardController::class, 'create']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

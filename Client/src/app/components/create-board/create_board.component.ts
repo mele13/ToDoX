@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BoardService } from 'src/app/services/board-service/board-service.service';
 
+// This component will be responsible for creating boards for a user.
+
 @Component({
   selector: 'app-create-board',
   templateUrl: './create_board.component.html',

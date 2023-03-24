@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ListTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
@@ -25,6 +26,10 @@ Route::post('boards/{board}', [BoardController::class, 'show'])->name('boards.sh
 // List routes
 Route::post('/boards/{board}/lists', [ListController::class, 'index']);
 Route::post('/boards/{board}/lists/createList', [ListController::class, 'create'])->name('lists.create');
+
+// Task routes
+Route::post('/boards/{board}/lists/{list}/tasks', [ListTaskController::class, 'index']);
+Route::post('/boards/{board}/lists/{list}/tasks', [ListTaskController::class, 'create'])->name('tasks.create');
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Board } from 'src/app/models/board';
-import { BoardList } from 'src/app/models/boardList';
-import { BoardService } from 'src/app/services/board-service/board-service.service';
+import { TaskList } from 'src/app/models/taskList';
+import { BoardService } from 'src/app/services/board-taskList-service/board-taskList-service.service';
 
 @Component({
   selector: 'app-board-detail',
@@ -11,38 +11,62 @@ import { BoardService } from 'src/app/services/board-service/board-service.servi
 })
 export class BoardDetailComponent implements OnInit {
   board: Board | undefined;
-  lists: BoardList[] | undefined;
-  boardId: number = 0;
+  lists: TaskList[] = [];
+  boardId = this.route.snapshot.paramMap.get('id');
+  selectedList: TaskList | undefined;
 
-  constructor(private boardService: BoardService, private route: ActivatedRoute) {}
+  sidebarVisible: boolean = true;
+  showPopup: boolean = false;
+  showListDetail: boolean = false;
+
+  constructor(private boardService: BoardService, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.boardId = parseInt(this.route.snapshot.paramMap.get('id') || '0', 10);
     this.getBoard();
     this.getLists();
   }
 
   getBoard(): void {
-    this.boardService.getBoardById(this.boardId).subscribe(
-      (board: Board) => {
-        console.log('Board retrieved:', board);
-        this.board = board;
-      },
-      (error: any) => {
-        console.error('Error retrieving board:', error);
-      }
-    );
+    if (this.boardId) {
+      this.boardService.getBoard(this.boardId).subscribe(
+        (board: Board) => {
+          console.log('Board retrieved:', board);
+          this.board = board;
+        },
+        (error: any) => {
+          console.error('Error retrieving board:', error);
+        }
+      );
+    }
   }
 
   getLists(): void {
-    this.boardService.getBoardListsByBoardId(this.boardId).subscribe(
-      (lists: BoardList[]) => {
-        console.log('Lists retrieved:', lists);
-        this.lists = lists;
-      },
-      (error: any) => {
-        console.error('Error retrieving lists:', error);
-      }
-    );
+    if (this.boardId) {
+      this.boardService.getTaskListsByBoardId(this.boardId).subscribe(
+        (lists: TaskList[]) => {
+          console.log('Lists retrieved:', lists);
+          this.lists = lists;
+        },
+        (error: any) => {
+          console.error('Error retrieving lists:', error);
+        }
+      );
+    }
+  }
+
+  toggleComponent(): void {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
+  addList(newList: TaskList) {
+    this.lists.push(newList);
+    this.showPopup = false;
+    this.getLists();
+  }
+
+  selectList(list: TaskList): void {
+    console.log("seleccionada");
+    this.selectedList = list;
+    this.showListDetail = true;
   }
 }

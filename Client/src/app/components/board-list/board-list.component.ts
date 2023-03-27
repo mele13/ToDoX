@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Board } from 'src/app/models/board';
-import { BoardService } from 'src/app/services/board-service/board-service.service';
+import { BoardService } from 'src/app/services/board-taskList-service/board-taskList-service.service';
 
 // This component will be responsible for displaying the list of all available boards
 
@@ -12,6 +12,7 @@ import { BoardService } from 'src/app/services/board-service/board-service.servi
 })
 export class BoardListComponent implements OnInit {
   boards: Board[] = [];
+  showPopup = false;
 
   constructor(private boardService: BoardService, private router: Router) {}
 
@@ -33,5 +34,11 @@ export class BoardListComponent implements OnInit {
 
   viewBoard(id: number) {
     this.router.navigate(['/boards', id]);
+  }
+
+  addBoard(newBoard: Board) {
+    this.boards.push(newBoard);
+    this.showPopup = false;
+    this.getBoards();
   }
 }

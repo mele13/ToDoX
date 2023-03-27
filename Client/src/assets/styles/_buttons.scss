@@ -1,0 +1,20 @@
+.qt-btn {
+    background-color: $melon-70;
+    border-radius: 30px;
+    border: 2px solid $white;
+    box-shadow: 0 5px $melon-40;
+
+    height: 2.5em;
+    color: $white;
+    font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $melon-80;
+    } 
+
+    &:active {
+        transform: translateY(4px);
+        box-shadow: 0 1px $melon-40;
+    }
+}

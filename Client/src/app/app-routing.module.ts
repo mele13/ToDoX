@@ -10,6 +10,8 @@ import { CreateBoardComponent } from './components/create-board/create-board.com
 import { BoardListComponent } from './components/board-list/board-list.component';
 import { BoardDetailComponent } from './components/board-detail/board-detail.component';
 
+import { ListDetailComponent } from './components/list-detail/list-detail.component';
+
 const routes: Routes = [
   /*
   If a user types in the page URL without adding anything after the domain, the content of the welcome component will be loaded,
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'register', component: SignupFormComponent },
   { path: 'boards', component: BoardListComponent },
   { path: 'boards/:id', component: BoardDetailComponent },
+  { path: 'boards/:boardId/:taskListId', component: ListDetailComponent},
   { path: 'profile', component: ProfileComponent },
 ];
 

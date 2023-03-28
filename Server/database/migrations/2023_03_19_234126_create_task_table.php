@@ -16,9 +16,7 @@ return new class extends Migration
         Schema::create('task', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->unsignedBigInteger('list_id');
-            $table->foreign('list_id')->references('id')->on('list');      
+            $table->text('description');            
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Board } from 'src/app/models/board';
 import { TaskList } from 'src/app/models/taskList';
 import { BoardService } from 'src/app/services/board-taskList-service/board-taskList-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board-detail',
@@ -19,7 +20,8 @@ export class BoardDetailComponent implements OnInit {
   showPopup: boolean = false;
   showListDetail: boolean = false;
 
-  constructor(private boardService: BoardService, private route: ActivatedRoute ) { }
+  constructor(private boardService: BoardService, private route: ActivatedRoute, private router: Router ) { }
+
 
   ngOnInit(): void {
     this.getBoard();

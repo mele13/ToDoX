@@ -11,7 +11,10 @@
     
         <div class="lists-container">
             <h4>Lists</h4>
-            <div *ngFor="let list of lists" (click)="selectList(list)">{{ list.name }}</div>
+            <div *ngFor="let list of lists">
+            <a [routerLink]="['/boards', boardId, list.id]">{{ list.name }}</a>
+            </div>
+
         </div>
     
         <div class="add-container">

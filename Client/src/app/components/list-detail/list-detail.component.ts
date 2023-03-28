@@ -15,8 +15,8 @@ export class ListDetailComponent {
   taskList: TaskList | undefined;
   tasks: Task[] = [];
 
-  boardId: string = '';
-  taskListId: string = '';
+  boardId = '';
+  taskListId = '';
   taskName: string = '';
   taskDescription: string = '';
 
@@ -25,13 +25,13 @@ export class ListDetailComponent {
   constructor(private taskService: TaskService, private boardService: BoardService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.selectedList) {
-      this.boardId = this.selectedList.board_id.toString();
-      this.taskListId = this.selectedList.id.toString();
+      this.route.paramMap.subscribe(params => {
+        this.boardId = params.get('boardId') || '';
+        this.taskListId = params.get('taskListId') || '';
+      })
       this.getList();
       this.getTasks();
     }
-  }
 
   getTasks(): void {
     this.taskService.getTasksByTaskListId(this.boardId, this.taskListId).subscribe(
@@ -46,6 +46,8 @@ export class ListDetailComponent {
   }
 
   getList() {
+    console.log('boardId:', this.boardId);
+    console.log('taskListId:', this.taskListId);
     this.boardService.getList(this.boardId, this.taskListId).subscribe(
       (taskList: TaskList) => {
         console.log('TaskList retrieved:', taskList);

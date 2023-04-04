@@ -1,5 +1,15 @@
 <header>
     <img class="logo" src="../../../assets/placeholder.png" (click)="goHome()">
+    <mat-form-field>
+        <mat-label>Select language</mat-label>
+        <mat-select [(value)]="selectedLang" (selectionChange)="switchLanguage()">
+            <mat-option value="en"><span class="flag-icon flag-icon-gb"></span> English</mat-option>
+            <mat-option value="es"><span class="flag-icon flag-icon-es"></span> Español</mat-option>
+            <mat-option value="de"><span class="flag-icon flag-icon-de"></span> Deutsch</mat-option>
+            <mat-option value="it"><span class="flag-icon flag-icon-it"></span> Italiano</mat-option>
+            <mat-option value="pt"><span class="flag-icon flag-icon-pt"></span> Português</mat-option>
+        </mat-select>
+    </mat-form-field>
     <div *ngIf="!showLoginButton" class="profile">
         <img class="profile-pic" src="../../../assets/icons/IoPersonCircle.svg" (click)="goProfile()">
         <label class="user-name">Lorem Ipsum</label>
@@ -8,5 +18,4 @@
         <button (click)="onLogin()">Log In</button>
         <button (click)="onSignUp()">Sign Up</button>
     </div>
-    <button (click)="switchLanguage()">Switch language</button>
 </header>

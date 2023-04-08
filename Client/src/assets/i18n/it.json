@@ -10,7 +10,8 @@
         "ok": "Ok",
         "color": "Colore",
         "settings": "Impostazioni",
-        "save": "Salva"
+        "save": "Salva",
+        "cancel": "Annulla"
     },
     "welcome": {
         "title": "Inizia a lavorare in modo",

@@ -10,7 +10,8 @@
         "ok": "Ok",
         "color": "Cor",
         "settings": "Configurações",
-        "save": "Salvar"
+        "save": "Salvar",
+        "cancel": "Cancelar"
     },
     "welcome": {
         "title": "Comece a trabalhar de forma",

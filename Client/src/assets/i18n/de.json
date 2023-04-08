@@ -10,7 +10,8 @@
         "ok": "Ok",
         "color": "Farbe",
         "settings": "Einstellungen",
-        "save": "Speichern"
+        "save": "Speichern",
+        "cancel": "Abbrechen"
     },
     "welcome": {
         "title": "Beginnen Sie mit der Arbeit in einer",

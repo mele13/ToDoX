@@ -12,7 +12,7 @@ export class HeaderComponent {
   selectedLang: string;
 
   constructor(private router: Router, public translate: TranslateService) {
-    this.translate.addLangs(['en', 'es']);
+    this.translate.addLangs(['en', 'es', 'de', 'it', 'pt']);
     const storedLang = localStorage.getItem('selectedLang');
     if (storedLang) {
       this.selectedLang = storedLang;

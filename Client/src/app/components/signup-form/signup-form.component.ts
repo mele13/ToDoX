@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { PasswordValidator } from 'src/app/validators/password.validator';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/user-service/user-service.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -22,7 +24,7 @@ export class SignupFormComponent {
   @ViewChild('passwordLabel') passwordLabel!: ElementRef;
   @ViewChild('repeatPasswordLabel') repeatPasswordLabel!: ElementRef;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder, private http: HttpClient, private userService: UserService) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -60,7 +62,7 @@ export class SignupFormComponent {
     this.router.navigate(['/..']);
   }
 
-  onSubmit() {
+  onSubmit() { // Rev frontend validation + REV const name, email, passwordd
     console.log(this.signupForm.value);
 
     if (this.error) this.resetErrors();
@@ -75,6 +77,14 @@ export class SignupFormComponent {
       if (emailErrors) this.onError(this.emailLabel);
       if (passwordErrors) this.onError(this.passwordLabel);
       if (repeatPasswordErrors) this.onError(this.repeatPasswordLabel);
-    } else this.router.navigate(['/profile']);
+    } else { // Api connection
+      const { name, email, password } = this.signupForm.value;
+      this.userService.registerUser(name, email, password).subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/login']);
+      }, error => {
+        console.error("Unable to create user", error);
+      });
+    }    
   }
 }

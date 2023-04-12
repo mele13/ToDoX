@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { PasswordValidator } from 'src/app/validators/password.validator';
+import { UserService } from 'src/app/services/user-service/user-service.service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,10 +19,10 @@ export class LoginFormComponent {
   @ViewChild('emailLabel') emailLabel!: ElementRef;
   @ViewChild('passwordLabel') passwordLabel!: ElementRef;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, PasswordValidator.strong()]]
+      password: ['', [Validators.required, Validators.required]] //PasswordValidator.strong()
     });
   }
 
@@ -56,7 +57,7 @@ export class LoginFormComponent {
     this.router.navigate(['/register']);
   }
 
-  onSubmit() {
+  onSubmit() { // Rev frontend validation
     console.log(this.loginForm.value);
 
     if (this.error) this.resetErrors();
@@ -67,6 +68,22 @@ export class LoginFormComponent {
     if (emailErrors || passwordErrors) {
       if (emailErrors) this.onError(this.emailLabel);
       if (passwordErrors) this.onError(this.passwordLabel);
-    } else this.router.navigate(['/boards']);
+    } else { // Api connection
+      const { email, password } = this.loginForm.value;
+      console.log(email, password)
+      this.userService.authenticateUser(email, password).subscribe(
+        (response) => {
+          // If the authentification is successful, the token is saved in the LocalStorage - REV
+          localStorage.setItem('authToken', response.token);
+          // The user is redirected to the boards page
+          this.router.navigate(['boards']);
+        }, (error) => {
+          // Display an error message
+          this.onError(this.emailLabel);
+          this.onError(this.passwordLabel);
+          console.log("Error authenticating user", error);
+        }
+      )
+    }
   }
 }

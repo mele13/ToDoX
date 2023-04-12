@@ -45,6 +45,15 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 #     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
 #     apt-get update && apt-get -yqq install yarn
 
+RUN apt-get update && apt-get install -y \
+    curl \
+    gnupg \
+    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs
+
+# Install npm
+RUN npm install -g npm
+
 # COPY conf.d/docker-php.ini /usr/local/etc/php/conf.d/docker-php.ini
 
 # USER $LOCAL_USER

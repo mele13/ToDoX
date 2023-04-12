@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
         'api' => [
-            'driver' => 'session',
+            'driver' => 'passport', // session
             'provider' => 'users',
             'hash' => true,
         ],

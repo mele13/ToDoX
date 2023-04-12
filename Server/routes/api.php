@@ -8,6 +8,7 @@ use App\Http\Controllers\TaskListController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,9 +65,20 @@ Route::post('labels', [LabelController::class, 'store'])->name('labels.store');
 //     Route::post('/states', [StateController::class, 'store']);
 // });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Not needed since angular handles front
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+// Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
+
+// User routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('users', [UserController::class, 'index']);
+Route::post('users', [UserController::class, 'store']);
 
 // Route::resource('boards', BoardController::class); // Boards resource routes - resftful
 // Route::resource('boards.lists', BoardListController::class)->shallow(); // Lists resource routes - resftful

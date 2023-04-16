@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { UppercasePipe } from './pipes/uppercase.pipe';
 
 import { BoardService } from './services/board-taskList-service/board-taskList-service.service';
@@ -58,6 +57,7 @@ import { CreateStateComponent } from './components/create-state/create-state.com
     CreateStateComponent,
   ],
   imports: [
+    // CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

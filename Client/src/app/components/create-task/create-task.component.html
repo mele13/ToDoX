@@ -27,6 +27,17 @@
             </div>
         </div>
 
+        <div class="form-group" id="periodicity">
+            <label class="name">periodicity</label>
+            <select  class="input" name="periodicity" [(ngModel)]="periodicity" [ngModelOptions]="{standalone: true}">
+                <option value="none">none</option>
+                <option value="yearly">yearly</option>
+                <option value="monthly">monthly</option>
+                <option value="weekly">weekly</option>
+                <option value="daily">daily</option>
+            </select>
+        </div>
+
         <!-- <div class="inline-group"> -->
             <div class="form-group" id="state">
                 <label class="name">{{ 'states.state' | translate }}<span class="asterisk">*</span></label>

@@ -21,6 +21,7 @@ export class CreateTaskComponent implements Form {
   selectedLabels: Label[] = [];
   startDate: Date | null = null;
   dueDate: Date | null = null;
+  @Input() periodicity: string = "none";
 
   @Input() boardId: string | null = null;
   @Input() taskListId: string | null = null;
@@ -128,11 +129,13 @@ export class CreateTaskComponent implements Form {
     let selectedState: string = this.selectedState.id.toString();
     let startDate: Date = new Date();
     let dueDate: Date = new Date();
+    let periodicity: string = this.periodicity;
     
     if (this.startDate) startDate = new Date(this.startDate);
     if (this.dueDate) dueDate = new Date(this.dueDate);
 
     this.loading = true;
+    console.log(periodicity);
     this.createTask(taskName, taskDescription, selectedState, startDate, dueDate);
   }
 }

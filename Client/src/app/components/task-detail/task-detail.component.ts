@@ -24,6 +24,7 @@ export class TaskDetailComponent implements OnInit, Form {
   selectedState: State | null = null;
   startDate: Date | null = null;
   dueDate: Date | null = null;
+  periodicity: string = 'none';
 
   @ViewChildren('input') inputs!: QueryList<ElementRef<any>>;
   @ViewChild('start') start!: ElementRef<any>;
@@ -141,7 +142,8 @@ export class TaskDetailComponent implements OnInit, Form {
     if (this.selectedState) this.task.state_id = this.selectedState.id;
     if (this.startDate) this.task.start_date = new Date(this.startDate);
     if (this.dueDate) this.task.due_date = new Date(this.dueDate);
-  
+    
+    console.log(this.periodicity);
     console.log('new task:', this.task);
     this.editTask.emit(this.task);
   }

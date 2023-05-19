@@ -138,7 +138,7 @@ export class ListDetailComponent implements OnChanges {
   unrestrictedEditTask(task: Task): void {
     console.log('task id:', task.id);
     this.taskService.editTask(this.boardId, this.taskListId, task.id.toString(), task.name,
-      task.description, task.state_id.toString(), [], task.start_date, task.due_date, task.state_position).subscribe({
+      task.description, task.state_id.toString(), [], task.start_date, task.due_date, task.state_position, task.periodicity).subscribe({
       next: (task: Task) => {
         console.log('saved task:', task);
       },

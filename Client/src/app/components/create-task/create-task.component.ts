@@ -105,12 +105,12 @@ export class CreateTaskComponent implements Form {
     this.selectedLabels = labels;
   }
 
-  private createTask(taskName: string, taskDescription: string, selectedState: string, startDate: Date, dueDate: Date) {
+  private createTask(taskName: string, taskDescription: string, selectedState: string, startDate: Date, dueDate: Date, periodicity: string) {
     if (!this.taskListId || !this.boardId) return;
 
     this.taskService.createTask(this.boardId, this.taskListId, 
       taskName, taskDescription, selectedState, this.selectedLabels, 
-      startDate, dueDate).subscribe({
+      startDate, dueDate, 0, periodicity).subscribe({
         next: (task: Task) => {
           console.log('created task:', task);
           this.taskCreated.emit();
@@ -136,6 +136,6 @@ export class CreateTaskComponent implements Form {
 
     this.loading = true;
     console.log(periodicity);
-    this.createTask(taskName, taskDescription, selectedState, startDate, dueDate);
+    this.createTask(taskName, taskDescription, selectedState, startDate, dueDate, periodicity);
   }
 }

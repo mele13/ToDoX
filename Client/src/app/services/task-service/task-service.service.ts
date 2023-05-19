@@ -29,7 +29,8 @@ export class TaskService {
   // Creates a new task in backend related to a taskList related to a board
   createTask(
     boardId: string, listId: string, taskName: string, taskDescription: string,
-    stateId: string, selectedLabels: Label[], startDate: Date | null, dueDate: Date | null, statePosition = 0
+    stateId: string, selectedLabels: Label[], startDate: Date | null, dueDate: Date | null, statePosition = 0,
+    taskPeriodicity: string | null
   ): Observable<Task> {
     const url = `${this.apiUrl}/boards/${boardId}/lists/${listId}/tasks`;
     const task = {
@@ -41,6 +42,7 @@ export class TaskService {
       start_date: startDate,
       due_date: dueDate,
       state_position: statePosition,
+      periodicity: taskPeriodicity
     };
     return this.http.post<Task>(url, task);
   }
@@ -48,7 +50,8 @@ export class TaskService {
   // Updates a task by id, list id and board id - REV opt with createTask
   editTask(
     boardId: string, listId: string, taskId: string, taskName: string, taskDescription: string,
-    stateId: string, selectedLabels: Label[], startDate: Date | null, dueDate: Date | null, statePosition: number
+    stateId: string, selectedLabels: Label[], startDate: Date | null, dueDate: Date | null, statePosition: number,
+    taskPeriodicity: string | null
   ): Observable<Task> {
     const url = `${this.apiUrl}/boards/${boardId}/lists/${listId}/tasks/${taskId}`;
     const task = {
@@ -58,7 +61,8 @@ export class TaskService {
       selectedLabels: selectedLabels,
       start_date: startDate,
       due_date: dueDate,
-      state_position: statePosition
+      state_position: statePosition,
+      periodicity: taskPeriodicity
     };
     return this.http.put<Task>(url, task);
   }

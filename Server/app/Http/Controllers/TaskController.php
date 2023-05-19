@@ -43,6 +43,7 @@ class TaskController extends Controller
             'due_date' => $due_date,
             'start_date' => $start_date,
             'state_position' => $request->input('state_position'),
+            'periodicity' => $request->input('periodicity'),
         ]);
         $task->save();
 
@@ -91,6 +92,7 @@ class TaskController extends Controller
             'due_date' => $due_date,
             'start_date' => $start_date,
             'state_position' => $request->input('state_position'),
+            'periodicity' => $request->input('periodicity'),
         ]);
 
         return response()->json($task, 201);

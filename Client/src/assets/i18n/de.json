@@ -15,8 +15,18 @@
         "state": "Zustand",
         "label": "Etikett",
         "startDate": "Startdatum",
-        "dueDate": "Enddatum"
+        "dueDate": "Enddatum",
+        "periodicity": "Periodizität"
     },
+
+    "periodicity": {
+        "none": "keiner",
+        "yearly": "jährlich",
+        "monthly": "monatlich",
+        "weekly": "wöchentlich",
+        "daily": "täglich"
+    },
+
     "welcome": {
         "title": "Beginnen Sie mit der Arbeit in einer",
         "span": "organisierten und koordinierten",

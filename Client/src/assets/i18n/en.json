@@ -15,7 +15,16 @@
         "state": "Status",
         "label": "Label",
         "startDate": "Start Date",
-        "dueDate": "Due Date"
+        "dueDate": "Due Date",
+        "periodicity": "Periodicity"
+    },
+
+    "periodicity": {
+        "none": "none",
+        "yearly": "yearly",
+        "monthly": "monthly",
+        "weekly": "weekly",
+        "daily": "daily"
     },
 
     "welcome": {

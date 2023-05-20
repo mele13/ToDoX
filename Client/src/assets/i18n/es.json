@@ -15,7 +15,16 @@
         "state": "Estado",
         "label": "Etiqueta",
         "startDate": "Fecha de Inicio",
-        "dueDate": "Fecha de Fin"
+        "dueDate": "Fecha de Fin",
+        "periodicity": "Periodicidad"
+    },
+
+    "periodicity": {
+        "none": "ninguna",
+        "yearly": "anual",
+        "monthly": "mensual",
+        "weekly": "semanal",
+        "daily": "diaria"
     },
 
     "welcome": {

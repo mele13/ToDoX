@@ -15,7 +15,16 @@
         "state": "État",
         "label": "Étiquette",
         "startDate": "Date de début",
-        "dueDate": "Date d'échéance"
+        "dueDate": "Date d'échéance",
+        "periodicity": "périodicité"
+    },
+
+    "periodicity": {
+        "none": "aucune",
+        "yearly": "annuelle",
+        "monthly": "mensuelle",
+        "weekly": "hebdomadaire",
+        "daily": "quotidienne"
     },
 
     "welcome": {

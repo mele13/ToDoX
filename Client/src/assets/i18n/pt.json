@@ -15,8 +15,18 @@
         "state": "Estado",
         "label": "Etiqueta",
         "startDate": "Data de Início",
-        "dueDate": "Data de Conclusão"
+        "dueDate": "Data de Conclusão",
+        "periodicity": "periodicidade"
     },
+
+    "periodicity": {
+        "none": "nenhum",
+        "yearly": "anual",
+        "monthly": "por mês",
+        "weekly": "semanal",
+        "daily": "diária"
+    },
+
     "welcome": {
         "title": "Comece a trabalhar de forma",
         "span": "organizada e coordenada",

@@ -37,13 +37,13 @@
                 </div>
 
                 <div class="label-input" id="periodicity">
-                    <label class="name">periodicity</label>
+                    <label class="name">{{ 'global.periodicity' | translate }}</label>
                     <select  class="date-input input-2" name="periodicity" [(ngModel)]="periodicity" [ngModelOptions]="{standalone: true}" (ngModelChange)="save()">
-                        <option value="none">none</option>
-                        <option value="yearly">yearly</option>
-                        <option value="monthly">monthly</option>
-                        <option value="weekly">weekly</option>
-                        <option value="daily">daily</option>
+                        <option value="none">{{ 'periodicity.none' | translate }}</option>
+                        <option value="yearly">{{ 'periodicity.yearly' | translate }}</option>
+                        <option value="monthly">{{ 'periodicity.monthly' | translate }}</option>
+                        <option value="weekly">{{ 'periodicity.weekly' | translate }}</option>
+                        <option value="daily">{{ 'periodicity.daily' | translate }}</option>
                     </select>
                 </div>
             </div>

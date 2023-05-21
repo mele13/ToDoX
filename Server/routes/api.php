@@ -61,21 +61,24 @@ Route::put('/comments/{commentId}', [TaskCommentController::class, 'update'])->n
 Route::delete('boards/{boardId}/lists/{taskListId}/tasks/{taskId}/comments/{taskCommentId}', [TaskCommentController::class, 'destroy'])->name('taskComment.destroy');
 
 // State routes
-Route::get('/boards/{boardId}/lists/{taskListId}/states', [StateController::class, 'index']);
-// Route::post('boards/{boardId}/lists/{taskListId}/states', [StateController::class, 'store'])->name('states.store');
-Route::get('/states/{stateId}/name', [StateController::class, 'getStateName']);
-// Route::get('/states', 'StateController@show');
+Route::get('boards/{boardId}/lists/{taskListId}/states', [StateController::class, 'index']);
+Route::post('boards/{boardId}/lists/{taskListId}/states', [StateController::class, 'store'])->name('states.store');
+Route::get('boards/{boardId}/lists/{taskListId}/states/{stateId}', [StateController::class, 'show'])->name('states.show');
+Route::put('states/{stateId}', [StateController::class, 'update'])->name('states.update');
+Route::delete('states/{stateId}', [StateController::class, 'destroy'])->name('states.destroy');
+Route::put('boards/{boardId}/lists/{taskListId}/assignStates', [StateController::class, 'assignToList'])->name('states.assignToList');
+Route::put('boards/{boardId}/lists/{taskListId}/deassignStates', [StateController::class, 'deassignFromList'])->name('states.deassignFromList');
+Route::get('states/{stateId}/name', [StateController::class, 'getStateName']);
 
 // Label routes
-Route::get('labels', [LabelController::class, 'index']);
-Route::post('labels', [LabelController::class, 'store'])->name('labels.store');
-// Route::get('tasks/{taskId}/labels', [LabelController::class, 'show']); // Get label assigned to a task REV
-
-// REV
-// Route::group(['prefix' => 'boards/{boardId}/lists/{taskListId}'], function () {
-//     Route::get('/states', [StateController::class, 'index']);
-//     Route::post('/states', [StateController::class, 'store']);
-// });
+Route::get('boards/{boardId}/lists/{taskListId}/labels', [LabelController::class, 'index']);
+Route::post('boards/{boardId}/lists/{taskListId}/labels', [LabelController::class, 'store'])->name('labels.store');
+Route::get('boards/{boardId}/lists/{taskListId}/labels/{labelId}', [LabelController::class, 'show'])->name('labels.show');
+Route::put('labels/{labelId}', [LabelController::class, 'update'])->name('labels.update');
+Route::delete('labels/{labelId}', [LabelController::class, 'destroy'])->name('labels.destroy');
+Route::get('boards/{boardId}/lists/{taskListId}/tasks/{taskId}/labels', [LabelController::class, 'getTaskLabels'])->name('labels.getTaskLabels');
+Route::post('boards/{boardId}/lists/{taskListId}/tasks/{taskId}/labels', [LabelController::class, 'assignToTask'])->name('labels.assignToTask');
+Route::delete('boards/{boardId}/lists/{taskListId}/tasks/{taskId}/labels', [LabelController::class, 'deassignFromTask'])->name('labels.deassignFromTask');
 
 // User routes
 Route::apiResource('users', \App\Http\Controllers\UserController::class);

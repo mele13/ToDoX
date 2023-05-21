@@ -21,11 +21,28 @@
                         <label class="state-name">{{ selectedState.name }}</label>
                     </div>
                 </div>
-                <div *ngIf="statesPopup" class="popup">
-                    <app-state-list [states]="states" [selectedState]="selectedState" (state)="changeState($event)" (close)="closeStates()"></app-state-list>
+                <div *ngIf="showStates" class="popup">
+                    <app-state-list [selectedState]="selectedState" (changes)="onChanges()" (state)="changeState($event)" (close)="closeStates()"></app-state-list>
                 </div>
+
                 <!-- aquí iría el selector de labels -->
-                <!-- <div class="select-input input-2"></div> -->
+                <!-- <div class="select-input input-2" (click)="openLabels()">
+                    <ng-container *ngIf="selectedLabels.length == 0">
+                        <label class="placeholder-text">Select labels...</label>
+                    </ng-container>
+                    <ng-container *ngIf="selectedLabels.length > 0">
+                        <ng-container *ngFor="let label of selectedLabels">
+                            <div class="label-balloon" [style.backgroundColor]="getBackgroundColor(label.color)">
+                                <i class="bi bi-circle-fill" [style.color]="getColor(label.color) ? getColor(label.color) : '#202130'"></i>
+                                <label class="state-name">{{ label.name }}</label>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div *ngIf="showLabels" class="popup">
+                    <app-label-list [selectedLabels]="selectedLabels" (changes)="onChanges()" (labels)="changeLabels($event)" (close)="closeLabels()"></app-labels-list>
+                </div> -->
+
                 <div class="label-input">
                     <label>{{ 'global.startDate' | translate }}</label>
                     <input #start type="date" [max]="dueDate" class="date-input input-2" name="startDate" [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}" (ngModelChange)="save()">
@@ -35,9 +52,23 @@
                     <label>{{ 'global.dueDate' | translate }}</label>
                     <input type="date" [min]="startDate" class="date-input input-2" name="dueDate" [(ngModel)]="dueDate" [ngModelOptions]="{standalone: true}" (ngModelChange)="save()">
                 </div>
+
+                <!-- Repetition -->
+                <div class="label-input">
+                    <label>Periodicidad</label>
+                    <select class="input" name="periodicity" [(ngModel)]="recurring_period" [ngModelOptions]="{standalone: true}" (ngModelChange)="save()">
+                        <option value="none">None</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="every-odd-day">Every odd day</option>
+                        <option value="every-even-day">Every even day</option>
+                    </select>
+                </div>                
             </div>
             <div class="bottom">
-                <div #btn class="delete-btn" (click)="onDelete(btn)"><img *ngIf="loading" class="spinner" src="../../../assets/spinner.gif">Borrar <i *ngIf="!loading" class="bi bi-trash-fill"></i></div>
+                <div #btn class="delete-btn" (click)="onDelete(btn)"><img *ngIf="loading" class="spinner" src="../../../assets/spinner.gif">Borrar</div>
             </div>
         </div>
     </div>

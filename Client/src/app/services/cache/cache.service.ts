@@ -202,12 +202,6 @@ export class CacheService {
     localStorage[TASKS_KEY] = JSON.stringify(Array.from(mapTasks.entries()));
   }
 
-  moveTask(task: Task): void {
-    let mapTasks: Map<number, Task> = new Map(localStorage[TASKS_KEY] ? JSON.parse(localStorage[TASKS_KEY]) : '');
-    mapTasks.set(task.id, task);
-    localStorage[TASKS_KEY] = JSON.stringify(Array.from(mapTasks.entries()));
-  }
-
   // comments -----------------------------------------------------------------------
 
   storeTaskComments(comments: TaskComment[]): void {

@@ -65,6 +65,12 @@
                         <option value="every-odd-day">Every odd day</option>
                         <option value="every-even-day">Every even day</option>
                     </select>
+                </div>
+                <div class="label-input">
+                    <label>Listas Actuales</label>
+                    <select class="input" name="listas" [(ngModel)]="tasklists" [ngModelOptions]="{standalone: true}" (ngModelChange)="save()">
+                        <option *ngFor="let tasklist of tasklists" [value]="tasklist.id">{{ tasklist.name }}</option>
+                    </select>
                 </div>                
             </div>
             <div class="bottom">

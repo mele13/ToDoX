@@ -9,6 +9,8 @@ import { User } from 'src/app/models/user';
 import { LabelService } from 'src/app/services/label/label.service';
 import { StateService } from 'src/app/services/state/state.service';
 import { TaskService } from 'src/app/services/task/task.service';
+import { TaskListService } from 'src/app/services/task-list/task-list.service';
+import { TaskList } from 'src/app/models/taskList';
 
 @Component({
   selector: 'app-task-detail',
@@ -34,6 +36,7 @@ export class TaskDetailComponent implements OnInit, Form {
 
   states: State[] = [];
   labels: Label[] = [];
+  tasklists: TaskList[] = [];
 
   @ViewChildren('input') inputs!: QueryList<ElementRef>;
   @ViewChild('start') start!: ElementRef;
@@ -51,7 +54,7 @@ export class TaskDetailComponent implements OnInit, Form {
   timeout: any;
   loading: boolean = false;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private taskService: TaskService, private labelService: LabelService, private stateService: StateService) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private taskService: TaskService, private labelService: LabelService, private stateService: StateService, private tasklistService: TaskListService) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       description: ['', [Validators.required, Validators.maxLength(200)]]
@@ -119,6 +122,12 @@ export class TaskDetailComponent implements OnInit, Form {
     this.labelService.getLabelByTaskId(this.boardId, this.taskListId, this.taskId).then(
       (labels: Label[]) => this.selectedLabels = labels
     )
+  }
+
+  private getTaskLists() {
+    if (!this.boardId) return;
+    console.log('loading states of list %d from board %d...', this.taskListId, this.boardId);
+    this.tasklistService.getTaskListsByBoardId(this.boardId);
   }
 
   // forms --------------------------------------------------------------------------

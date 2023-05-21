@@ -139,7 +139,7 @@ export class TaskService {
     return await new Promise((resolve) => 
       http.subscribe({
         next: (task: Task) => {
-          this.cacheService.moveTask(task); 
+          this.cacheService.storeTask(task); 
           console.log('task deleted');
           resolve(task);
         },

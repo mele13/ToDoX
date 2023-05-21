@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from 'src/app/models/task';
 import { Label } from 'src/app/models/label';
 import { CacheService } from '../cache/cache.service';
+import { literalMap } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -126,5 +127,30 @@ export class TaskService {
         error: (err: any) => console.error('error deleting a task:', err)
       })
     );
+  }
+
+  async moveTask(boardId: string, listId: string, taskId: string, NewlistTaskId: string, NewstateId: string, selectedLabels: Label[]): Promise<Task> {
+    console.log('Move task %d...', taskId);
+    const http = this.http.put<Task>(`${this.apiUrl}/boards/${boardId}/lists/${listId}/tasks/${taskId}`, {
+      tasklist_id: NewlistTaskId,
+      state_id: NewstateId
+    });
+    
+    return await new Promise((resolve) => 
+      http.subscribe({
+        next: (task: Task) => {
+          this.cacheService.moveTask(task); 
+          console.log('task deleted');
+          resolve(task);
+        },
+        error: (err: any) => console.error('error deleting a task:', err)
+      })
+    );
+  }
+
+  async copyTask(boardId: string, originalListId: string, newlistId: string, taskId: number, selectedLabels: Label[], NewstateId: string): Promise<Task> {
+    let task: any;
+    task = await this.getTaskById(boardId, originalListId, taskId);
+    return this.createTask(boardId, newlistId, task.name, task.description, NewstateId, selectedLabels, task.start_date, task.due_date, task.periodicity, task.state_position);
   }
 }

@@ -29,6 +29,7 @@ export class ListDetailKanbanComponent implements OnChanges {
   stateTasks: { [key: number]: Task[] } = {};
   draggingTask: Task | null = null;
 
+
   constructor(
     private taskService: TaskService
   ) { }

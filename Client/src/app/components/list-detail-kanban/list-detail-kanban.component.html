@@ -9,6 +9,7 @@
                             <textarea class="task-name" disabled>{{ task.name }}</textarea>
                             <div class="options">
                                 <i class="bi bi-pencil-fill" (click)="editTask(task)"></i>
+                                <i *ngIf="task.periodicity != 'none'" class="bi bi-repeat"></i>
                             </div>
                         </div>
                     </ng-container>
